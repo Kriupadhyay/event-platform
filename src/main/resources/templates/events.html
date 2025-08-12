@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>All Events</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<canvas id="futuristic-canvas"></canvas> <div class="main-container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-primary">All Events</h1>
+        <a th:href="@{/events/new}" class="btn btn-primary">Create a New Event</a>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-4 mb-4" th:each="event : ${events}">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${event.title}">Event Title</h5>
+                    <p class="card-text text-muted" th:text="${event.description}">Event Description</p>
+                    <p class="text-info">Location: <span th:text="${event.location}"></span></p>
+                    <p class="text-success">Date & Time: <span th:text="${event.eventDateTime}"></span></p>
+                    <a th:href="@{/events/{id}(id=${event.id})}" class="btn btn-outline-primary mt-2">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
+<script th:src="@{/script.js}"></script>
+</body>
+</html>

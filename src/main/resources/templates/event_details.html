@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>All Events</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h1 th:text="${event.title}">Event Title</h1>
+<p><strong>Description:</strong> <span th:text="${event.description}"></span></p>
+<p><strong>Location:</strong> <span th:text="${event.location}"></span></p>
+<p><strong>Date & Time:</strong> <span th:text="${event.eventDateTime}"></span></p>
+<p><strong>Created by:</strong> <span th:text="${event.creator.username}"></span></p>
+
+<form th:action="@{/events/{id}/rsvp(id=${event.id})}" method="post" sec:authorize="isAuthenticated()">
+    <button type="submit">RSVP for this Event</button>
+</form>
+
+<hr>
+<h3>Attendees:</h3>
+<p th:if="${rsvps.isEmpty()}">No one has RSVP'd yet.</p>
+<ul>
+    <li th:each="rsvp : ${rsvps}" th:text="${rsvp.user.username}">User Name</li>
+</ul>
+
+<a th:href="@{/}">Back to all events</a>
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
+</body>
+</html>
