@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: events-platform
+    env: java
+    plan: free
+    repo: https://github.com/shashank09mishra/events-platform.git
+    branch: master
+    rootDir: .
+    dockerContext: .
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: postgresql://events_user:Six1C7MyiGF1P5xFSWgyb3nVL9c9KJsD@dpg-d2dnf9k9c44c73fr6g6g-a.oregon-postgres.render.com/events_platform_0veh
+      - key: SPRING_DATASOURCE_USERNAME
+        value: events_user
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: Six1C7MyiGF1P5xFSWgyb3nVL9c9KJsD
+      - key: spring.jpa.hibernate.ddl-auto
+        value: update
+      - key: spring.jpa.show-sql
+        value: true
